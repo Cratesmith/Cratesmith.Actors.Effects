@@ -1,0 +1,20 @@
+{
+	"name": "com.cratesmith.actors.effects",
+	"displayName": "Cratesmith.Actors.Effects",
+	"description": "A system for flexible events based off pooled actor prefabs in Unity3d.",
+	"version": "0.0.1-develop",
+	"unity": "2018.3",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Cratesmith/Cratesmith.Actors.Effects.git"
+	},
+	"src": "Packages/Cratesmith.Actors.Effects",
+	"author": "Kieran Lord <cratesmith@cratesmith.com> (https://github.com/cratesmith)",
+	"dependencies": {
+		"com.cratesmith.utils": "https://github.com/Cratesmith/Cratesmith.Utils#0.0.1-develop",
+		"com.cratesmith.actors": "https://github.com/Cratesmith/Cratesmith.Actors#0.0.1-develop",
+		"com.cratesmith.actors.pool": "https://github.com/Cratesmith/Cratesmith.Actors.Pool#0.0.1-develop",
+		"com.cratesmith.scriptexecutionorder": "https://github.com/Cratesmith/Cratesmith.ScriptExecutionOrder#0.0.1-develop"			
+	}
+}
