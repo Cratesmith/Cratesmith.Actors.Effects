@@ -2,9 +2,9 @@
     "name": "Cratesmith.Actors.Effects",
     "references": [
         "Cratesmith.Actors",
-        "Cratesmith.Pool",
         "Cratesmith.Utils",
-        "Cratesmith.ScriptExecutionOrder"
+        "Cratesmith.ScriptExecutionOrder",
+        "Cratesmith.Actors.Pool"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

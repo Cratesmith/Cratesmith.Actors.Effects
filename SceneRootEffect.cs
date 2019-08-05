@@ -1,3 +1,4 @@
-﻿using Cratesmith.Actors;
-
-public class SceneRootEffect : SceneRoot<SceneRootEffect> {}
+﻿namespace Cratesmith.Actors.Effects
+{
+    public class SceneRootEffect : SceneRoot<SceneRootEffect> {}
+}
