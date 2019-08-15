@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Cratesmith.Actors.Effects
 {
     [RequireComponent(typeof(LineRenderer))]
-    [ScriptDependency(typeof(EffectLine))]
+    [ScriptExecuteAfter(typeof(EffectLine))]
     public class SubEffectLineRenderer : EffectComponent<EffectLine> 
     {
         [SerializeField]		float m_startOffset = 0f;
