@@ -3,6 +3,7 @@
     "references": [
         "Cratesmith.Actors",
         "Cratesmith.Utils",
+        "Cratesmith.Collections",
         "Cratesmith.ScriptExecutionOrder",
         "Cratesmith.Actors.Pool"
     ],
