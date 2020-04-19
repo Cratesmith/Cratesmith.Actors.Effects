@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cratesmith.Actors.Pool;
 using Cratesmith.Collections.Temp;
-using Cratesmith.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +18,14 @@ namespace Cratesmith.Actors.Effects
         public ParticleSystem[]			particleSystems		{ get; private set; }	
         public AudioSource[]			audioSources		{ get; private set; }
         public Handle<Transform>		parent				{ get; private set; }
-        public float					startTime			{ get; private set; }
+
+        float m_startTime = -1f;
+        public float startTime
+        {
+            get { if (m_startTime <= 0f) m_startTime = Time.time; return m_startTime; }
+            private set => m_startTime = value;
+        }
+
         public Vector3					localPosition		{ get; protected set; }
         public Quaternion				localRotation		{ get; protected set; }
         public bool						hasParent			{ get; private set; }
@@ -149,6 +155,7 @@ namespace Cratesmith.Actors.Effects
 
         void OnDisable()
         {
+            startTime = -1;
             s_allEffects.Remove(this);
         }
 
