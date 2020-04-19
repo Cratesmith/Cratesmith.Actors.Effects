@@ -90,7 +90,7 @@ namespace Cratesmith.Actors.Effects
             {
                 if(i!=null)
                 {
-                    i.Play();
+                    i.Play(false);
                 }
             }
 
@@ -109,8 +109,7 @@ namespace Cratesmith.Actors.Effects
 
             foreach (var system in particleSystems)
             {
-                var emmision = system.emission;
-                emmision.enabled = false;
+                system.Stop(false, ParticleSystemStopBehavior.StopEmitting);
             }			
 
             foreach (var audioSource in audioSources)
