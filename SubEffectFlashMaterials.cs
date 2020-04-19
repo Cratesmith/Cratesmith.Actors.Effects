@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Cratesmith.Actors.Effects
 {
@@ -13,14 +14,17 @@ namespace Cratesmith.Actors.Effects
         private bool m_isPlaying;
         private Dictionary<Renderer, Material[]>						m_previousMaterials = new Dictionary<Renderer, Material[]>();
         private static Dictionary<Renderer, SubEffectFlashMaterials>	s_flashEffectLookup = new Dictionary<Renderer, SubEffectFlashMaterials>();
+        private static HashSet<SubEffectFlashMaterials>    s_active = new HashSet<SubEffectFlashMaterials>();
 
         public override void Play()
         {
+            Assert.IsTrue(!isPlaying);
             if (m_flashMaterial != null && parent != null)
             {
                 m_previousMaterials.Clear();
                 StartCoroutine(EffectCoroutine());
             }
+            s_active.Add(this);
         }
 
         private IEnumerator EffectCoroutine()
@@ -31,17 +35,20 @@ namespace Cratesmith.Actors.Effects
             foreach (var renderer in parent.GetComponentsInChildren<Renderer>())
             {
                 if (!(renderer is MeshRenderer || renderer is SkinnedMeshRenderer)) continue;
-
-                SubEffectFlashMaterials otherFlashEffect;
-                if(s_flashEffectLookup.TryGetValue(renderer, out otherFlashEffect))
+                
+                if(s_flashEffectLookup.TryGetValue(renderer, out var otherFlashEffect))
                 {
-                    m_previousMaterials[renderer] = (Material[])otherFlashEffect.m_previousMaterials[renderer].Clone();
+                    if (otherFlashEffect != this)
+                    {
+                        Assert.IsTrue(otherFlashEffect.isPlaying);
+                        m_previousMaterials[renderer] = (Material[])otherFlashEffect.m_previousMaterials[renderer].Clone();
+                        otherFlashEffect.m_previousMaterials.Remove(renderer);
+                    }
                 }
                 else
                 {
                     m_previousMaterials[renderer] = (Material[])renderer.sharedMaterials.Clone();
                 }
-			
                 s_flashEffectLookup[renderer] = this;
             }
 
@@ -101,8 +108,15 @@ namespace Cratesmith.Actors.Effects
             }
             m_previousMaterials.Clear();
             m_isPlaying = false;
+            s_active.Remove(this);
         }
 
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            Assert.IsTrue(!isPlaying);
+        }
+        
         public override bool isPlaying
         {
             get { return m_isPlaying; }

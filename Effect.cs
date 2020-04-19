@@ -100,6 +100,11 @@ namespace Cratesmith.Actors.Effects
                 }
             }
 
+            foreach (var i in effect.m_effectComponents)
+            {
+                if(i!=null && !i.isPlaying) i.Play();
+            }
+
             effect.startTime = Time.time;
 		
             return effectRef;
@@ -125,7 +130,7 @@ namespace Cratesmith.Actors.Effects
 
             foreach (var effectComponent in m_effectComponents)
             {
-                effectComponent.Stop();
+                if(effectComponent.isPlaying) effectComponent.Stop();
             }
         }
 
@@ -306,10 +311,6 @@ namespace Cratesmith.Actors.Effects
             {
                 effectComponent.Stop();
             }
-            else
-            {
-                effectComponent.Play();
-            }
         }
 
         /// <summary>
@@ -318,6 +319,7 @@ namespace Cratesmith.Actors.Effects
         public void RemoveEffectComponent(IEffectComponent effectComponent)
         {
             m_effectComponents.Remove(effectComponent);
+            if(effectComponent.isPlaying) effectComponent.Stop();
         }
         #endregion
 

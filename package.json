@@ -2,7 +2,7 @@
 	"name": "com.cratesmith.actors.effects",
 	"displayName": "Cratesmith.Actors.Effects",
 	"description": "A system for flexible events based off pooled actor prefabs in Unity3d.",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"unity": "2018.3",
 	"license": "MIT",
 	"repository": {
