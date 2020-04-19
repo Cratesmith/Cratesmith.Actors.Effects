@@ -64,7 +64,7 @@ namespace Cratesmith.Actors.Effects
 
         protected virtual void OnDisable()
         {
-            owner.RemoveEffectComponent(this);
+            if(owner) owner.RemoveEffectComponent(this);
         }
     }
 }
