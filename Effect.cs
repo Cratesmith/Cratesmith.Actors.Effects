@@ -200,7 +200,7 @@ namespace Cratesmith.Actors.Effects
 
             foreach (var system in particleSystems)
             {
-                if ((system.emission.enabled && system.main.loop) || system.particleCount > 0)
+                if ((system.emission.enabled && system.main.loop && !system.isStopped) || system.particleCount > 0)
                 {
                     return;
                 }
